@@ -1,6 +1,7 @@
 package com.springbootUser.MongoDB.resources;
 
 
+import com.springbootUser.MongoDB.domain.Post;
 import com.springbootUser.MongoDB.domain.User;
 import com.springbootUser.MongoDB.dto.UserDTO;
 import com.springbootUser.MongoDB.repository.UserRepository;
@@ -59,6 +60,12 @@ public class UserResources {
         obj = service.update(obj);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(value="/{id}/posts", method=RequestMethod.GET)
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 
 
